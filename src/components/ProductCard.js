@@ -7,11 +7,11 @@ function ProductCard(props) {
 
   return (
     <div key={product.id} className="card">
-      <Link to={`/product/${product.id}`}>
+      <Link to={`/product/${product._id}`}>
         <img className="medium" src={product.image} alt="product" />
       </Link>
       <div className="class-body">
-        <Link to={`/product/${product.id}`}>
+        <Link to={`/product/${product._id}`}>
           <h1>{product.title}</h1>
         </Link>
         <Rating rating={product.rating} numReviews={product.numReviews} />

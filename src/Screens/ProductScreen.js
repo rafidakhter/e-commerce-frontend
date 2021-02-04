@@ -23,8 +23,10 @@ function ProductScreen(props) {
   //
 
   const addToCartHandler = () => {
+    console.log("addtocart function from product screen trigerred");
     props.history.push(`/cart/${productId}?qty=${qty}`);
   };
+
   return (
     <div>
       {loading ? (

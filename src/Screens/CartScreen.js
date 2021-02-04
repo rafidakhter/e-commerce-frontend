@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { addToCart } from "../Redux/action/cartAction";
+import { addToCart, removeFromCart } from "../Redux/action/cartAction";
 import { useDispatch, useSelector } from "react-redux";
 import MessageBox from "../components/MessageBox";
 import { Link } from "react-router-dom";
@@ -15,10 +15,10 @@ function CartScreen(props) {
   const { cartItems } = cart;
 
   const removeFromCartHandler = (id) => {
-    console.log(`product id ${id} to be removed`);
+    dispatch(removeFromCart(id));
   };
+
   const checkOutHandler = () => {
-    console.log(`product checked out`);
     props.history.push("/signin?redirect=shipping");
   };
 
@@ -47,7 +47,7 @@ function CartScreen(props) {
                   ></img>
 
                   <div className="min-30">
-                    <Link to={`/product/${item.product}`}>{item.name}</Link>
+                    <Link to={`/product/${item.product}`}>{item.title}</Link>
                   </div>
                   <select
                     value={item.qty}

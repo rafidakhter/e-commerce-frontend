@@ -27,7 +27,7 @@ function Homescreen() {
       ) : (
         <div className="row center">
           {products.map((product) => {
-            return <ProductCard key={product.id} product={product} />;
+            return <ProductCard key={product._id} product={product} />;
           })}
         </div>
       )}

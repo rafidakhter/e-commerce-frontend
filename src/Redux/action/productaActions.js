@@ -13,7 +13,7 @@ export const listProducts = () => async (dispatch) => {
     type: PRODUCT_LIST_REQUEST,
   });
   try {
-    const { data } = await Axios.get("http://localhost:5000/products/api");
+    const { data } = await Axios.get("http://localhost:5000/products");
     dispatch({
       type: PRODUCT_LIST_SUCESS,
       payload: data,
@@ -32,7 +32,7 @@ export const detailProducts = (productId) => async (dispatch) => {
   });
   try {
     const { data } = await Axios.get(
-      `http://localhost:5000/products/api/${productId}`
+      `http://localhost:5000/products/${productId}`
     );
     dispatch({
       type: PRODUCT_DETAILS_SUCESS,
