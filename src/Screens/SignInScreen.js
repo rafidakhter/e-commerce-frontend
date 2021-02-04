@@ -29,6 +29,7 @@ function SignInScreen(props) {
       props.history.push(redirect);
     }
   }, [userInfo]);
+
   return (
     <div>
       <form className="form" onSubmit={submitHandler}>

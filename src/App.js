@@ -8,6 +8,7 @@ import ProductScreen from "./Screens/ProductScreen";
 import CartScreen from "./Screens/CartScreen";
 import SigninScreen from "./Screens/SignInScreen";
 import RegisterScreen from "./Screens/RegisterScreen";
+import ShippingAddressScreen from "./Screens/ShippingAddressScreen";
 
 //redux actions and functions
 import { signOut } from "./Redux/action/userAction";
@@ -61,6 +62,7 @@ function App() {
           </div>
         </header>
         <main>
+          <Route path="/Shipping" component={ShippingAddressScreen}></Route>
           <Route path="/Register" component={RegisterScreen}></Route>
           <Route path="/signin" component={SigninScreen}></Route>
           <Route path="/cart/:id?" component={CartScreen}></Route>

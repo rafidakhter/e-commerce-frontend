@@ -8,6 +8,10 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
 } from "../constants/userConstants";
+import {
+  CART_REMOVE_SHIPPING_ADDRESS,
+  CART_REMOVE,
+} from "../constants/cartConstants";
 
 export const signIn = (email, password) => async (dispatch) => {
   dispatch({ type: USER_SIGNIN_REQUEST });
@@ -33,6 +37,8 @@ export const signOut = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   localStorage.removeItem("cartItems");
   dispatch({ type: USER_SIGNOUT });
+  dispatch({ type: CART_REMOVE_SHIPPING_ADDRESS });
+  dispatch({ type: CART_REMOVE });
 };
 
 export const register = (name, email, password) => async (dispatch) => {
