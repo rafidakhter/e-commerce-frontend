@@ -10,7 +10,7 @@ import {
 } from "../constants/userConstants";
 import {
   CART_REMOVE_SHIPPING_ADDRESS,
-  CART_REMOVE,
+  CART_EMPTY,
 } from "../constants/cartConstants";
 
 export const signIn = (email, password) => async (dispatch) => {
@@ -39,7 +39,7 @@ export const signOut = () => (dispatch) => {
   localStorage.removeItem("shippingAddress");
   dispatch({ type: USER_SIGNOUT });
   dispatch({ type: CART_REMOVE_SHIPPING_ADDRESS });
-  dispatch({ type: CART_REMOVE });
+  dispatch({ type: CART_EMPTY });
 };
 
 export const register = (name, email, password) => async (dispatch) => {

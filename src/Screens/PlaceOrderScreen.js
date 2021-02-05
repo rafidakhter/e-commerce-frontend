@@ -1,23 +1,45 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import CheckoutSteps from "../components/CheckoutSteps";
+import { createOrder } from "../Redux/action/orderActios";
+import { ORDER_CREATE_RESET } from "../Redux/constants/orderConstats";
+
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
 
 export default function PlaceOrderScreen(props) {
   const cart = useSelector((state) => state.cart);
   if (!cart.paymentMethod) {
     props.history.push("/payment");
   }
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { loading, error, sucess, orderItems } = orderCreate;
+
+  const dispatch = useDispatch();
+
   const toPrice = (num) => Number(num.toFixed(2)); // rounding totla price to 2 dp
   cart.itemsPrice = toPrice(
     cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0)
   );
+
   cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10); // if total price is greater than 100 then free shipping else $10
   cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
+
   const placeOrderHandler = () => {
-    // TODO: dispatch place order action
+    // our backend accepts orderItems not cart items, so we need to add an order items in the redux state management
+
+    dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
   };
+
+  useEffect(() => {
+    if (sucess) {
+      props.history.push(`/order/${orderItems._id}`);
+      dispatch({ type: ORDER_CREATE_RESET });
+    }
+  }, [sucess]);
+
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
@@ -118,6 +140,8 @@ export default function PlaceOrderScreen(props) {
                   Place Order
                 </button>
               </li>
+              {loading && <LoadingBox></LoadingBox>}
+              {error && <MessageBox></MessageBox>}
             </ul>
           </div>
         </div>

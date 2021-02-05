@@ -3,7 +3,7 @@ import {
   CART_REMOVE_ITEM,
   CART_SAVE_SHIPPING_ADDRESS,
   CART_REMOVE_SHIPPING_ADDRESS,
-  CART_REMOVE,
+  CART_EMPTY,
   CART_SAVE_PAYMENT_METHOD,
 } from "../constants/cartConstants";
 
@@ -29,7 +29,7 @@ const cartReducer = (
         ...state,
         cartItems: state.cartItems.filter((x) => x.product !== action.payload),
       };
-    case CART_REMOVE:
+    case CART_EMPTY:
       return {
         ...state,
         cartItems: [],
