@@ -9,6 +9,7 @@ import CartScreen from "./Screens/CartScreen";
 import SigninScreen from "./Screens/SignInScreen";
 import RegisterScreen from "./Screens/RegisterScreen";
 import ShippingAddressScreen from "./Screens/ShippingAddressScreen";
+import PaymentScreen from "./Screens/PaymentScreen";
 
 //redux actions and functions
 import { signOut } from "./Redux/action/userAction";
@@ -36,7 +37,10 @@ function App() {
           </div>
           <div>
             <Link to="/cart">
-              Cart
+              <i
+                className="fa fa-shopping-cart"
+                style={{ fontSize: "1.5em" }}
+              ></i>
               {cartItems.length > 0 && (
                 <span className="badge">{cartItems.length}</span>
               )}
@@ -62,6 +66,7 @@ function App() {
           </div>
         </header>
         <main>
+          <Route path="/payment" component={PaymentScreen}></Route>
           <Route path="/Shipping" component={ShippingAddressScreen}></Route>
           <Route path="/Register" component={RegisterScreen}></Route>
           <Route path="/signin" component={SigninScreen}></Route>

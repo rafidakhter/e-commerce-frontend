@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingAddress } from "../Redux/action/cartAction";
-import CheckoutSteps from "../components/CheckOutSteps";
+import CheckoutSteps from "../components/CheckoutSteps";
 
 export default function ShippingAddressScreen(props) {
   const cart = useSelector((state) => state.cart);
@@ -24,6 +24,7 @@ export default function ShippingAddressScreen(props) {
     props.history.push("/payment");
   };
   useEffect(() => {
+    console.log(userInfo);
     if (!userInfo) {
       props.history.push("/signin?redirect=shipping");
     }
