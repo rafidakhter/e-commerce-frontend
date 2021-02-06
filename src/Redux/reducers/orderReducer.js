@@ -32,12 +32,12 @@ export const orderCreateReducer = (
 };
 
 export const orderDetailsReducer = (
-  state = { loading: true, order: {}, error: false },
+  state = { loading: true, error: false },
   action
 ) => {
   switch (action.type) {
     case ORDER_DETAILS_REQUEST:
-      return { ...state, loading: true };
+      return { loading: true };
     case ORDER_DETAILS_SUCCESS:
       return { ...state, loading: false, order: action.payload, error: false };
     case ORDER_DETAILS_FAIL:
