@@ -11,6 +11,7 @@ import RegisterScreen from "./Screens/RegisterScreen";
 import ShippingAddressScreen from "./Screens/ShippingAddressScreen";
 import PaymentScreen from "./Screens/PaymentScreen";
 import PlaceOrderScreen from "./Screens/PlaceOrderScreen";
+import CreateOrderScreen from "./Screens/CreateOrderScreen";
 
 //redux actions and functions
 import { signOut } from "./Redux/action/userAction";
@@ -67,6 +68,7 @@ function App() {
           </div>
         </header>
         <main>
+          <Route path="/order/:id" component={CreateOrderScreen}></Route>
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
           <Route path="/payment" component={PaymentScreen}></Route>
           <Route path="/Shipping" component={ShippingAddressScreen}></Route>
