@@ -227,6 +227,12 @@ img.large {
   font-weight: bold;
 }
 
+.alert-success {
+  color: rgb(71, 160, 90);
+  background-color: rgb(134, 218, 132);
+  font-weight: bold;
+}
+
 /* Form */
 
 .form {
