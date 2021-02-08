@@ -14,7 +14,6 @@ export default function PaymentMethodScreen(props) {
     props.history.push("/placeorder");
   };
   useEffect(() => {
-    console.log(!shippingAddress);
     if (!shippingAddress.address) {
       props.history.push("/shipping?redirect=payment");
     }
