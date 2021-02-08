@@ -12,8 +12,8 @@ import ShippingAddressScreen from "./Screens/ShippingAddressScreen";
 import PaymentScreen from "./Screens/PaymentScreen";
 import PlaceOrderScreen from "./Screens/PlaceOrderScreen";
 import CreateOrderScreen from "./Screens/CreateOrderScreen";
-import orderHistoryScreen from "./Screens/orderHistoryScreen";
-import OrderHistory from "./Screens/OrderHistory";
+import OrderHistoryScreen from "./Screens/OrderHistoryScreen";
+import ProfileScreen from "./Screens/ProfileScreen";
 
 //redux actions and functions
 import { signOut } from "./Redux/action/userAction";
@@ -58,6 +58,9 @@ function App() {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
+                    <Link to="/profile">Profile</Link>
+                  </li>
+                  <li>
                     <Link to="/ordershistory">Order History</Link>
                   </li>
                   <li>
@@ -73,11 +76,8 @@ function App() {
           </div>
         </header>
         <main>
-          <Route path="/ordershistory" component={OrderHistory}></Route>
-          <Route
-            path="/orderHistory/:id"
-            component={orderHistoryScreen}
-          ></Route>
+          <Route path="/ordershistory" component={OrderHistoryScreen}></Route>
+          <Route path="/profile" component={ProfileScreen}></Route>
           <Route path="/order/:id" component={CreateOrderScreen}></Route>
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
           <Route path="/payment" component={PaymentScreen}></Route>

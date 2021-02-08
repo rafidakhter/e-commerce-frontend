@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { detailsUser } from "../actions/userActions";
+import { detailsUser } from "../Redux/action/userAction";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 
