@@ -16,7 +16,6 @@ function OrderHistoryScreen(props) {
 
   useEffect(() => {
     if (!userInfo) {
-      console.log("redirecting");
       props.history.push("/signin?redirect=ordershistory");
     } else {
       dispatch(getOrderHistory());

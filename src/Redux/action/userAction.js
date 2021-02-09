@@ -10,6 +10,9 @@ import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
+  USER_UPDATE_PROFILE_FAIL,
+  USER_UPDATE_PROFILE_REQUEST,
+  USER_UPDATE_PROFILE_SUCCESS,
 } from "../constants/userConstants";
 import {
   CART_REMOVE_SHIPPING_ADDRESS,
@@ -83,5 +86,30 @@ export const detailsUser = (userId) => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
     dispatch({ type: USER_DETAILS_FAIL, payload: message });
+  }
+};
+
+export const updateUserProfile = (user) => async (dispatch, getState) => {
+  dispatch({ type: USER_UPDATE_PROFILE_REQUEST, payload: user });
+  const {
+    userSignin: { userInfo },
+  } = getState();
+  try {
+    const { data } = await Axios.put(
+      `http://localhost:5000/users/updateprofile`,
+      user,
+      {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      }
+    );
+    dispatch({ type: USER_UPDATE_PROFILE_SUCCESS }); // updating the information in the back end
+    dispatch({ type: USER_SIGNIN_SUCCESS, payload: data }); // calling the action to have access to the latest updated user data
+    localStorage.setItem("userInfo", JSON.stringify(data)); // saving the updated data in local storage
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: USER_UPDATE_PROFILE_FAIL, payload: message });
   }
 };

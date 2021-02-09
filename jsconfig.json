@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "target": "es6"
+  },
+  "exclude": ["node_modules"]
+}
+
+// helps with auto import

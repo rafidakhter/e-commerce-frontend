@@ -18,6 +18,7 @@ import ProfileScreen from "./Screens/ProfileScreen";
 //redux actions and functions
 import { signOut } from "./Redux/action/userAction";
 import { useSelector, useDispatch } from "react-redux";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   const cart = useSelector((state) => state.cart); // this is to access the cart items from local storage
@@ -76,8 +77,11 @@ function App() {
           </div>
         </header>
         <main>
+          <PrivateRoute
+            path="/profile"
+            component={ProfileScreen}
+          ></PrivateRoute>
           <Route path="/ordershistory" component={OrderHistoryScreen}></Route>
-          <Route path="/profile" component={ProfileScreen}></Route>
           <Route path="/order/:id" component={CreateOrderScreen}></Route>
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
           <Route path="/payment" component={PaymentScreen}></Route>
