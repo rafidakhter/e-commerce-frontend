@@ -15,6 +15,7 @@ import {
   orderPayReducer,
   orderHistoryReducer,
 } from "./reducers/orderReducer";
+import productCreateReducer from "./reducers/productCreateReducer";
 
 const cartItems = localStorage.getItem("cartItems")
   ? JSON.parse(localStorage.getItem("cartItems"))
@@ -43,6 +44,7 @@ const reducer = combineReducers({
   orderHistory: orderHistoryReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
+  productCreate: productCreateReducer,
 });
 
 const composeEnhancer =

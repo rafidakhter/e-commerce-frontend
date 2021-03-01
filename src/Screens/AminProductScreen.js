@@ -2,35 +2,60 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import { listProducts } from "../Redux/action/productaActions";
+import { createProduct, listProducts } from "../Redux/action/productaActions";
+import { PRODUCT_CREATE_RESET } from "../Redux/constants/productConstants";
 
 function AdminProductScreen(props) {
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+
+  const productCreate = useSelector((state) => state.productCreate);
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    product: createdProduct,
+  } = productCreate;
 
   const dispatch = useDispatch();
 
   var deleteProduct = (product_id) => {
     // RestAPI request to delete product
     //dispatch delete handler
-    dispatch(removeProduct(product_id));
     console.log("product deleted");
   };
+
+  var createHandler = () => {
+    dispatch(createProduct());
+  };
+  let count = 0;
+
   useEffect(() => {
+    if (successCreate) {
+      dispatch({ type: PRODUCT_CREATE_RESET });
+      props.history.push(`/product/${createdProduct._id}/edit`);
+    }
     dispatch(listProducts());
-  }, [dispatch]);
+    count++;
+  }, [dispatch, successCreate]);
 
   return (
     <div>
+      <div className="row">
+        <h1>Products</h1>
+        <button type="button" className="primary" onClick={createHandler}>
+          Create Product
+        </button>
+      </div>
+      {loadingCreate && <LoadingBox></LoadingBox>}
+      {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
+
       {loading ? (
         <LoadingBox />
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <div className="row center">
-          <h1>product History</h1>
           <table style={{ width: "90%" }}>
             <thead>
               <tr>
