@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // screens
 import HomeScreen from "./Screens/Homescreen";
@@ -11,99 +11,34 @@ import RegisterScreen from "./Screens/RegisterScreen";
 import ShippingAddressScreen from "./Screens/ShippingAddressScreen";
 import PaymentScreen from "./Screens/PaymentScreen";
 import PlaceOrderScreen from "./Screens/PlaceOrderScreen";
-import CreateOrderScreen from "./Screens/CreateOrderScreen";
+import OrderScreen from "./Screens/OrderScreen";
 import OrderHistoryScreen from "./Screens/OrderHistoryScreen";
 import ProfileScreen from "./Screens/ProfileScreen";
 
-//redux actions and functions
-import { signOut } from "./Redux/action/userAction";
-import { useSelector, useDispatch } from "react-redux";
+// components
 import PrivateRoute from "./components/PrivateRoute";
+import Navbar from "./components/Navbar";
+import AdminRoute from "./components/AdminRoute";
+import AdminProductScreen from "./Screens/AminProductScreen";
 
 function App() {
-  const cart = useSelector((state) => state.cart); // this is to access the cart items from local storage
-  const { cartItems } = cart;
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
-
-  const dispatch = useDispatch();
-  const signoutHandler = () => {
-    dispatch(signOut());
-  };
   return (
     <Router>
-      {" "}
       <div className="grid-container">
         <header className="row">
-          <div>
-            <Link to="/" className="brand">
-              Amazona
-            </Link>
-          </div>
-          <div>
-            <Link to="/cart">
-              <i
-                className="fa fa-shopping-cart"
-                style={{ fontSize: "1.5em" }}
-              ></i>
-              {cartItems.length > 0 && (
-                <span className="badge">{cartItems.length}</span>
-              )}
-            </Link>
-            {userInfo ? (
-              <div className="dropdown">
-                {" "}
-                <Link to="/">
-                  {userInfo.name}
-                  <i className="fa fa-caret-down"></i>
-                </Link>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/profile">Profile</Link>
-                  </li>
-                  <li>
-                    <Link to="/ordershistory">Order History</Link>
-                  </li>
-                  <li>
-                    <Link to="/" onClick={signoutHandler}>
-                      Sign Out
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              <Link to="/signin">Sign In</Link>
-            )}
-            {userInfo && userInfo.isAdmin && (
-              <div className="dropdown">
-                <Link to="#admin">
-                  Admin <i className="fa fa-caret-down"></i>
-                </Link>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/dashboard">Dashboard</Link>
-                  </li>
-                  <li>
-                    <Link to="/productlist">Products</Link>
-                  </li>
-                  <li>
-                    <Link to="/orderlist">Orders</Link>
-                  </li>
-                  <li>
-                    <Link to="/userlist">Users</Link>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
+          <Navbar />
         </header>
         <main>
           <PrivateRoute
             path="/profile"
             component={ProfileScreen}
           ></PrivateRoute>
+          <AdminRoute
+            path="/productlist"
+            component={AdminProductScreen}
+          ></AdminRoute>
           <Route path="/ordershistory" component={OrderHistoryScreen}></Route>
-          <Route path="/order/:id" component={CreateOrderScreen}></Route>
+          <Route path="/order/:id" component={OrderScreen}></Route>
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
           <Route path="/payment" component={PaymentScreen}></Route>
           <Route path="/Shipping" component={ShippingAddressScreen}></Route>

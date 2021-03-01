@@ -4,5 +4,3 @@
   },
   "exclude": ["node_modules"]
 }
-
-// helps with auto import
